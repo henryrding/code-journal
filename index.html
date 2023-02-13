@@ -11,6 +11,9 @@
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -20,28 +23,34 @@
     <div class="container">
       <div class="row">
         <div class="column-full">
-          <h2>Code Journal</h2>
+          <h3>Code Journal</h3>
         </div>
       </div>
     </div>
   </header>
   <main class="container">
     <div class="row" data-view="entry-form">
-      <div class="column-full">
-        <form>
+      <form class="row">
+        <div class="column-full">
           <h1>New Entry</h1>
+        </div>
+        <div class="column-full column-half">
           <img src="images/placeholder-image-square.jpg" alt="placeholder-image-square">
+        </div>
+        <div class="column-full column-half">
           <label for="title">Title</label>
           <input type="text" name="title" id="title">
           <label for="photo-url">Photo URL</label>
           <input type="url" name="photo" id="photo-url">
+        </div>
+        <div class="column-full">
           <label for="notes">Notes</label>
           <textarea name="notes" id="notes" cols="38" rows="6"></textarea>
-          <div class="form-actions">
-            <button type="submit">SAVE</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div class="form-actions column-full">
+          <button type="submit">SAVE</button>
+        </div>
+      </form>
     </div>
     <div data-view="entries" class="hidden"></div>
   </main>

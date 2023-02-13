@@ -1,0 +1,61 @@
+body {
+  background-color: #f0f0f0;
+  font-family: "Proza Libre", sans-serif;
+}
+
+header {
+  background-color: #552782;
+  color: white;
+}
+
+h3 {
+  font-weight: normal;
+}
+
+img,
+input,
+textarea,
+button {
+  border-radius: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+
+input,
+textarea {
+  border: 1px solid gray;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+img,
+label,
+input,
+textarea {
+  display: block;
+  width: 100%;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid #552782;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  background-color: #552782;
+  color: white;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
