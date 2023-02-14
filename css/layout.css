@@ -18,13 +18,6 @@
   width: 100%;
 }
 
-@media screen and (max-width: 767px) {
-  img {
-    height: 30vh;
-    object-fit: cover;
-  }
-}
-
 @media screen and (min-width: 768px) {
   .container {
     max-width: 900px;
@@ -38,13 +31,5 @@
   .column-half {
     width: 50%;
     margin-bottom: 1.5rem;
-  }
-
-  img {
-    height: 100%;
-  }
-
-  button:hover {
-    cursor: pointer;
   }
 }

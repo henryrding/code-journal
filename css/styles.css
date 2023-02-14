@@ -59,3 +59,20 @@ button {
   display: flex;
   justify-content: flex-end;
 }
+
+@media screen and (max-width: 767px) {
+  img {
+    height: 30vh;
+    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  img {
+    height: 100%;
+  }
+
+  button:hover {
+    cursor: pointer;
+  }
+}
