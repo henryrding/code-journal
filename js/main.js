@@ -3,6 +3,8 @@ var $photoPreview = document.querySelector('#photo-preview');
 var $form = document.querySelector('form');
 var $ul = document.querySelector('ul');
 var $noEntries = document.querySelector('.no-entries');
+var $entryForm = document.querySelector('[data-view=entry-form]');
+var $entries = document.querySelector('[data-view=entries]');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -59,3 +61,16 @@ function toggleNoEntries() {
 }
 
 $ul.addEventListener('click', toggleNoEntries);
+
+function viewSwap(view) {
+  if (view === 'entries') {
+    $entries.className = 'row';
+    $entryForm.className = 'row hidden';
+  } else if (view === 'entry-form') {
+    $entryForm.className = 'row';
+    $entries.className = 'row hidden';
+  }
+  data.view = view;
+}
+
+viewSwap('entries');
