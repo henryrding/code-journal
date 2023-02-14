@@ -14,8 +14,7 @@ h3 {
 
 img,
 input,
-textarea,
-button {
+textarea {
   border-radius: 0.25rem;
   margin-bottom: 1.5rem;
 }
@@ -47,17 +46,50 @@ textarea:focus {
   border: 2px solid #552782;
 }
 
-button {
-  padding: 0.5rem 1rem;
+button,
+a {
+  padding: 0.3rem 1rem;
   font-size: 1rem;
   border: none;
   background-color: #552782;
   color: white;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+ul {
+  padding: 0%;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+p {
+  font-size: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  line-height: 1.5rem;
 }
 
 .form-actions {
   display: flex;
   justify-content: flex-end;
+}
+
+.entries {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.center {
+  text-align: center;
 }
 
 @media screen and (max-width: 767px) {
