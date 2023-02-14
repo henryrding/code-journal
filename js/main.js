@@ -24,6 +24,11 @@ $form.addEventListener('submit', function (event) {
   data.entries.unshift(formData);
   $photoPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
+  $ul.prepend(renderEntry(formData));
+  viewSwap('entries');
+  if ($noEntries.className === 'row no-entries') {
+    toggleNoEntries();
+  }
 });
 
 function renderEntry(entry) {
@@ -61,8 +66,6 @@ function toggleNoEntries() {
     $noEntries.className = 'row no-entries';
   }
 }
-
-$ul.addEventListener('click', toggleNoEntries);
 
 function viewSwap(view) {
   if (view === 'entries') {
