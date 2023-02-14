@@ -55,6 +55,16 @@ button {
   color: white;
 }
 
+ul {
+  padding: 0%;
+}
+
+p {
+  font-size: 1rem;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+  line-height: 1.5rem;
+}
+
 .form-actions {
   display: flex;
   justify-content: flex-end;
