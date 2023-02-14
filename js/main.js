@@ -56,16 +56,21 @@ document.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
     var $entryTree = renderEntry(data.entries[i]);
     $ul.appendChild($entryTree);
+  } viewSwap(data.view);
+  if ($ul.children.length > 0) {
+    toggleNoEntries();
   }
 });
 
 function toggleNoEntries() {
-  if ($noEntries.className === 'row no-entries') {
-    $noEntries.className = 'row no-entries hidden';
+  if ($noEntries.className === 'column-full no-entries') {
+    $noEntries.className = 'column-full no-entries hidden';
   } else {
-    $noEntries.className = 'row no-entries';
+    $noEntries.className = 'column-full no-entries';
   }
 }
+
+$ul.addEventListener('click', toggleNoEntries);
 
 function viewSwap(view) {
   if (view === 'entries') {
