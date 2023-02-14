@@ -26,7 +26,7 @@ $form.addEventListener('submit', function (event) {
   $form.reset();
   $ul.prepend(renderEntry(formData));
   viewSwap('entries');
-  if ($noEntries.className === 'row no-entries') {
+  if ($noEntries.className === 'column-full no-entries') {
     toggleNoEntries();
   }
 });
@@ -69,8 +69,6 @@ function toggleNoEntries() {
     $noEntries.className = 'column-full no-entries';
   }
 }
-
-$ul.addEventListener('click', toggleNoEntries);
 
 function viewSwap(view) {
   if (view === 'entries') {
