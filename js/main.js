@@ -6,6 +6,7 @@ var $noEntries = document.querySelector('.no-entries');
 var $entryForm = document.querySelector('[data-view=entry-form]');
 var $entries = document.querySelector('[data-view=entries]');
 var $entriesButton = document.querySelector('#entries-button');
+var $newButton = document.querySelector('#new-button');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -76,4 +77,8 @@ function viewSwap(view) {
 
 $entriesButton.addEventListener('click', function () {
   viewSwap('entries');
+});
+
+$newButton.addEventListener('click', function () {
+  viewSwap('entry-form');
 });
