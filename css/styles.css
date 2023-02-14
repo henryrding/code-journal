@@ -83,6 +83,11 @@ p {
   align-items: center;
 }
 
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
 .center {
   text-align: center;
 }
