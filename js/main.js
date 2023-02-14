@@ -1,6 +1,7 @@
 var $photoUrl = document.querySelector('#photo-url');
 var $photoPreview = document.querySelector('#photo-preview');
 var $form = document.querySelector('form');
+var $ul = document.querySelector('ul');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -41,4 +42,9 @@ function renderEntry(entry) {
   return $entry;
 }
 
-renderEntry();
+document.addEventListener('DOMContentLoaded', function (event) {
+  for (var i = 0; i < data.entries.length; i++) {
+    var $entryTree = renderEntry(data.entries[i]);
+    $ul.appendChild($entryTree);
+  }
+});
