@@ -2,6 +2,7 @@ var $photoUrl = document.querySelector('#photo-url');
 var $photoPreview = document.querySelector('#photo-preview');
 var $form = document.querySelector('form');
 var $ul = document.querySelector('ul');
+var $noEntries = document.querySelector('.no-entries');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -48,3 +49,13 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $ul.appendChild($entryTree);
   }
 });
+
+function toggleNoEntries() {
+  if ($noEntries.className === 'row no-entries') {
+    $noEntries.className = 'row no-entries hidden';
+  } else {
+    $noEntries.className = 'row no-entries';
+  }
+}
+
+$ul.addEventListener('click', toggleNoEntries);
