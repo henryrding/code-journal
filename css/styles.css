@@ -72,12 +72,16 @@ p {
   line-height: 1.5rem;
 }
 
+i {
+  color: #552782;
+}
+
 .form-actions {
   display: flex;
   justify-content: flex-end;
 }
 
-.entries {
+.space-between {
   display: flex;
   justify-content: space-between;
   align-items: center;

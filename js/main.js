@@ -34,6 +34,7 @@ $form.addEventListener('submit', function (event) {
 function renderEntry(entry) {
   var $entry = document.createElement('li');
   $entry.className = 'row';
+  $entry.setAttribute('data-entry-id', entry.entryID);
   var $columnDiv = document.createElement('div');
   $columnDiv.className = 'column-full column-half';
   $entry.appendChild($columnDiv);
@@ -44,7 +45,12 @@ function renderEntry(entry) {
   $columnDiv1.className = 'column-full column-half';
   $entry.appendChild($columnDiv1);
   var $h2 = document.createElement('h2');
+  $h2.className = 'space-between';
   $h2.textContent = entry.title;
+  var $i = document.createElement('i');
+  $i.className = 'fa fa-pencil';
+  $i.setAttribute('aria-hidden', 'true');
+  $h2.insertAdjacentElement('beforeend', $i);
   $columnDiv1.appendChild($h2);
   var $p = document.createElement('p');
   $p.textContent = entry.notes;
