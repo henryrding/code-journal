@@ -70,6 +70,11 @@ p {
   font-size: 1rem;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
   line-height: 1.5rem;
+  white-space: pre-line;
+}
+
+i {
+  color: #552782;
 }
 
 .form-actions {
@@ -77,7 +82,7 @@ p {
   justify-content: flex-end;
 }
 
-.entries {
+.space-between {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -104,7 +109,8 @@ p {
     height: 100%;
   }
 
-  button:hover {
+  button:hover,
+  i:hover {
     cursor: pointer;
   }
 }

@@ -7,6 +7,7 @@ var $entryForm = document.querySelector('[data-view=entry-form]');
 var $entries = document.querySelector('[data-view=entries]');
 var $entriesButton = document.querySelector('#entries-button');
 var $newButton = document.querySelector('#new-button');
+var $entryFormHeading = document.querySelector('.entry-form-heading');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -19,12 +20,25 @@ $form.addEventListener('submit', function (event) {
     photoUrl: $form.elements.photo.value,
     notes: $form.elements.notes.value
   };
-  formData.entryID = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(formData);
   $photoPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
-  $ul.prepend(renderEntry(formData));
+  if (data.editing === null) {
+    formData.entryID = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(formData);
+    $ul.prepend(renderEntry(formData));
+  } else if (data.editing !== null) {
+    formData.entryID = data.editing.entryID;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryID === formData.entryID) {
+        data.entries[i] = formData;
+        var $dataEntryId = document.querySelector('[data-entry-id=' + CSS.escape(formData.entryID) + ']');
+        $ul.replaceChild(renderEntry(formData), $dataEntryId);
+        $entryFormHeading.textContent = 'New Entry';
+        data.editing = null;
+      }
+    }
+  }
   viewSwap('entries');
   if ($noEntries.className === 'column-full no-entries') {
     toggleNoEntries();
@@ -33,7 +47,8 @@ $form.addEventListener('submit', function (event) {
 
 function renderEntry(entry) {
   var $entry = document.createElement('li');
-  $entry.className = 'row';
+  $entry.className = 'row entry-item';
+  $entry.setAttribute('data-entry-id', entry.entryID);
   var $columnDiv = document.createElement('div');
   $columnDiv.className = 'column-full column-half';
   $entry.appendChild($columnDiv);
@@ -44,7 +59,12 @@ function renderEntry(entry) {
   $columnDiv1.className = 'column-full column-half';
   $entry.appendChild($columnDiv1);
   var $h2 = document.createElement('h2');
+  $h2.className = 'space-between';
   $h2.textContent = entry.title;
+  var $i = document.createElement('i');
+  $i.className = 'fa fa-pencil';
+  $i.setAttribute('aria-hidden', 'true');
+  $h2.insertAdjacentElement('beforeend', $i);
   $columnDiv1.appendChild($h2);
   var $p = document.createElement('p');
   $p.textContent = entry.notes;
@@ -88,3 +108,22 @@ $entriesButton.addEventListener('click', function () {
 $newButton.addEventListener('click', function () {
   viewSwap('entry-form');
 });
+
+$ul.addEventListener('click', handleClick);
+
+function handleClick(event) {
+  if (event.target.tagName === 'I') {
+    viewSwap('entry-form');
+  }
+  var $closestAncestor = event.target.closest('.entry-item');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryID.toString() === $closestAncestor.getAttribute('data-entry-id')) {
+      data.editing = data.entries[i];
+    }
+  }
+  $form.elements.title.value = data.editing.title;
+  $form.elements.photo.value = data.editing.photoUrl;
+  $form.elements.notes.value = data.editing.notes;
+  $entryFormHeading.textContent = 'Edit Entry';
+  $photoPreview.setAttribute('src', data.editing.photoUrl);
+}
