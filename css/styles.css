@@ -108,7 +108,8 @@ i {
     height: 100%;
   }
 
-  button:hover {
+  button:hover,
+  i:hover {
     cursor: pointer;
   }
 }

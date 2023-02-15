@@ -7,6 +7,7 @@ var $entryForm = document.querySelector('[data-view=entry-form]');
 var $entries = document.querySelector('[data-view=entries]');
 var $entriesButton = document.querySelector('#entries-button');
 var $newButton = document.querySelector('#new-button');
+var $entryFormHeading = document.querySelector('.entry-form-heading');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -33,7 +34,7 @@ $form.addEventListener('submit', function (event) {
 
 function renderEntry(entry) {
   var $entry = document.createElement('li');
-  $entry.className = 'row';
+  $entry.className = 'row entry-item';
   $entry.setAttribute('data-entry-id', entry.entryID);
   var $columnDiv = document.createElement('div');
   $columnDiv.className = 'column-full column-half';
@@ -94,3 +95,21 @@ $entriesButton.addEventListener('click', function () {
 $newButton.addEventListener('click', function () {
   viewSwap('entry-form');
 });
+
+$ul.addEventListener('click', handleClick);
+
+function handleClick(event) {
+  if (event.target.tagName === 'I') {
+    viewSwap('entry-form');
+  }
+  var $closestAncestor = event.target.closest('.entry-item');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].entryID.toString() === $closestAncestor.getAttribute('data-entry-id')) {
+      data.editing = data.entries[i];
+    }
+  }
+  $form.elements.title.value = data.editing.title;
+  $form.elements.photo.value = data.editing.photoUrl;
+  $form.elements.notes.value = data.editing.notes;
+  $entryFormHeading.textContent = 'Edit Entry';
+}
