@@ -11,6 +11,7 @@ var $entryFormHeading = document.querySelector('.entry-form-heading');
 var $formActions = document.querySelector('#form-actions');
 var $deleteButton = document.querySelector('#delete-button');
 var $overlay = document.querySelector('#overlay');
+var $cancelButton = document.querySelector('#cancel-button');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -18,6 +19,10 @@ $photoUrl.addEventListener('input', function (event) {
 
 $deleteButton.addEventListener('click', function () {
   $overlay.className = 'row';
+});
+
+$cancelButton.addEventListener('click', function () {
+  $overlay.className = 'row hidden';
 });
 
 $form.addEventListener('submit', function (event) {
