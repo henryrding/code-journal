@@ -46,16 +46,59 @@ textarea:focus {
   border: 2px solid #552782;
 }
 
-button,
-a {
-  padding: 0.3rem 1rem;
+#overlay {
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 75%);
+  position: fixed;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup {
+  background-color: white;
+  width: fit-content;
+  border-radius: 0.25rem;
+  padding: 1rem;
+}
+
+#cancel-button,
+#confirm-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+#cancel-button {
+  background-color: #b7b7b7;
+}
+
+#confirm-button {
+  background-color: #dd2121;
+  color: white;
+}
+
+#entries-button,
+#save-button,
+#new-button {
+  padding: 0.5rem 1rem;
   font-size: 1rem;
   border: none;
   background-color: #552782;
   color: white;
   border-radius: 0.25rem;
   text-decoration: none;
-  font-family: inherit;
+}
+
+#delete-button {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #dc2828;
+  border: none;
+  font-size: 1rem;
 }
 
 ul {
@@ -77,9 +120,10 @@ i {
   color: #552782;
 }
 
-.form-actions {
+.flex-end {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .space-between {

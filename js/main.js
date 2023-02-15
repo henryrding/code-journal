@@ -8,10 +8,41 @@ var $entries = document.querySelector('[data-view=entries]');
 var $entriesButton = document.querySelector('#entries-button');
 var $newButton = document.querySelector('#new-button');
 var $entryFormHeading = document.querySelector('.entry-form-heading');
+var $formActions = document.querySelector('#form-actions');
+var $deleteButton = document.querySelector('#delete-button');
+var $overlay = document.querySelector('#overlay');
+var $cancelButton = document.querySelector('#cancel-button');
+var $confirmButton = document.querySelector('#confirm-button');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
 });
+
+$deleteButton.addEventListener('click', function () {
+  $overlay.className = 'row';
+});
+
+$cancelButton.addEventListener('click', hideOverlay);
+
+$confirmButton.addEventListener('click', function () {
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.editing.entryID === data.entries[i].entryID) {
+      data.entries.splice(i, 1);
+    }
+  }
+  var $dataEntryId = document.querySelector('[data-entry-id=' + CSS.escape(data.editing.entryID) + ']');
+  $dataEntryId.remove();
+  if ($ul.children.length === 0) {
+    toggleNoEntries();
+  }
+  data.editing = null;
+  hideOverlay();
+  viewSwap('entries');
+});
+
+function hideOverlay() {
+  $overlay.className = 'row hidden';
+}
 
 $form.addEventListener('submit', function (event) {
   event.preventDefault();
@@ -39,6 +70,8 @@ $form.addEventListener('submit', function (event) {
       }
     }
   }
+  $deleteButton.className = 'hidden';
+  $formActions.className = 'flex-end column-full';
   viewSwap('entries');
   if ($noEntries.className === 'column-full no-entries') {
     toggleNoEntries();
@@ -102,6 +135,14 @@ function viewSwap(view) {
 }
 
 $entriesButton.addEventListener('click', function () {
+  if ($entryFormHeading.textContent === 'Edit Entry') {
+    $photoPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $form.reset();
+    data.editing = null;
+    $deleteButton.className = 'hidden';
+    $formActions.className = 'flex-end column-full';
+    $entryFormHeading.textContent = 'New Entry';
+  }
   viewSwap('entries');
 });
 
@@ -114,16 +155,18 @@ $ul.addEventListener('click', handleClick);
 function handleClick(event) {
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
-  }
-  var $closestAncestor = event.target.closest('.entry-item');
-  for (var i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].entryID.toString() === $closestAncestor.getAttribute('data-entry-id')) {
-      data.editing = data.entries[i];
+    var $closestAncestor = event.target.closest('.entry-item');
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryID.toString() === $closestAncestor.getAttribute('data-entry-id')) {
+        data.editing = data.entries[i];
+      }
     }
+    $form.elements.title.value = data.editing.title;
+    $form.elements.photo.value = data.editing.photoUrl;
+    $form.elements.notes.value = data.editing.notes;
+    $entryFormHeading.textContent = 'Edit Entry';
+    $photoPreview.setAttribute('src', data.editing.photoUrl);
+    $deleteButton.className = '';
+    $formActions.className = 'space-between column-full';
   }
-  $form.elements.title.value = data.editing.title;
-  $form.elements.photo.value = data.editing.photoUrl;
-  $form.elements.notes.value = data.editing.notes;
-  $entryFormHeading.textContent = 'Edit Entry';
-  $photoPreview.setAttribute('src', data.editing.photoUrl);
 }
