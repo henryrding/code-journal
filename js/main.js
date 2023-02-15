@@ -29,11 +29,11 @@ $confirmButton.addEventListener('click', function () {
     if (data.editing.entryID === data.entries[i].entryID) {
       data.entries.splice(i, 1);
     }
-    var $dataEntryId = document.querySelector('[data-entry-id=' + CSS.escape(data.editing.entryID) + ']');
-    $dataEntryId.remove();
-    if ($ul.children.length === 0) {
-      toggleNoEntries();
-    }
+  }
+  var $dataEntryId = document.querySelector('[data-entry-id=' + CSS.escape(data.editing.entryID) + ']');
+  $dataEntryId.remove();
+  if ($ul.children.length === 0) {
+    toggleNoEntries();
   }
   data.editing = null;
   hideOverlay();
