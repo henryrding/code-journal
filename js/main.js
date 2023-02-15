@@ -20,12 +20,25 @@ $form.addEventListener('submit', function (event) {
     photoUrl: $form.elements.photo.value,
     notes: $form.elements.notes.value
   };
-  formData.entryID = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.unshift(formData);
   $photoPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   $form.reset();
-  $ul.prepend(renderEntry(formData));
+  if (data.editing === null) {
+    formData.entryID = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.unshift(formData);
+    $ul.prepend(renderEntry(formData));
+  } else if (data.editing !== null) {
+    formData.entryID = data.editing.entryID;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryID === formData.entryID) {
+        data.entries[i] = formData;
+        var $dataEntryId = document.querySelector('[data-entry-id=' + CSS.escape(formData.entryID) + ']');
+        $ul.replaceChild(renderEntry(formData), $dataEntryId);
+        $entryFormHeading.textContent = 'New Entry';
+        data.editing = null;
+      }
+    }
+  }
   viewSwap('entries');
   if ($noEntries.className === 'column-full no-entries') {
     toggleNoEntries();
@@ -112,4 +125,5 @@ function handleClick(event) {
   $form.elements.photo.value = data.editing.photoUrl;
   $form.elements.notes.value = data.editing.notes;
   $entryFormHeading.textContent = 'Edit Entry';
+  $photoPreview.setAttribute('src', data.editing.photoUrl);
 }
