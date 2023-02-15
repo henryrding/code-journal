@@ -135,6 +135,14 @@ function viewSwap(view) {
 }
 
 $entriesButton.addEventListener('click', function () {
+  if ($entryFormHeading.textContent === 'Edit Entry') {
+    $photoPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $form.reset();
+    data.editing = null;
+    $deleteButton.className = 'hidden';
+    $formActions.className = 'flex-end column-full';
+    $entryFormHeading.textContent = 'New Entry';
+  }
   viewSwap('entries');
 });
 
