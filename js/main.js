@@ -10,9 +10,14 @@ var $newButton = document.querySelector('#new-button');
 var $entryFormHeading = document.querySelector('.entry-form-heading');
 var $formActions = document.querySelector('#form-actions');
 var $deleteButton = document.querySelector('#delete-button');
+var $overlay = document.querySelector('#overlay');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
+});
+
+$deleteButton.addEventListener('click', function () {
+  $overlay.className = 'row';
 });
 
 $form.addEventListener('submit', function (event) {
@@ -118,18 +123,18 @@ $ul.addEventListener('click', handleClick);
 function handleClick(event) {
   if (event.target.tagName === 'I') {
     viewSwap('entry-form');
-  }
-  var $closestAncestor = event.target.closest('.entry-item');
-  for (var i = 0; i < data.entries.length; i++) {
-    if (data.entries[i].entryID.toString() === $closestAncestor.getAttribute('data-entry-id')) {
-      data.editing = data.entries[i];
+    var $closestAncestor = event.target.closest('.entry-item');
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryID.toString() === $closestAncestor.getAttribute('data-entry-id')) {
+        data.editing = data.entries[i];
+      }
     }
+    $form.elements.title.value = data.editing.title;
+    $form.elements.photo.value = data.editing.photoUrl;
+    $form.elements.notes.value = data.editing.notes;
+    $entryFormHeading.textContent = 'Edit Entry';
+    $photoPreview.setAttribute('src', data.editing.photoUrl);
+    $deleteButton.className = '';
+    $formActions.className = 'space-between column-full';
   }
-  $form.elements.title.value = data.editing.title;
-  $form.elements.photo.value = data.editing.photoUrl;
-  $form.elements.notes.value = data.editing.notes;
-  $entryFormHeading.textContent = 'Edit Entry';
-  $photoPreview.setAttribute('src', data.editing.photoUrl);
-  $deleteButton.className = '';
-  $formActions.className = 'space-between column-full';
 }
