@@ -8,6 +8,8 @@ var $entries = document.querySelector('[data-view=entries]');
 var $entriesButton = document.querySelector('#entries-button');
 var $newButton = document.querySelector('#new-button');
 var $entryFormHeading = document.querySelector('.entry-form-heading');
+var $formActions = document.querySelector('#form-actions');
+var $deleteButton = document.querySelector('#delete-button');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -39,6 +41,8 @@ $form.addEventListener('submit', function (event) {
       }
     }
   }
+  $deleteButton.className = 'hidden';
+  $formActions.className = 'flex-end column-full';
   viewSwap('entries');
   if ($noEntries.className === 'column-full no-entries') {
     toggleNoEntries();
@@ -126,4 +130,6 @@ function handleClick(event) {
   $form.elements.notes.value = data.editing.notes;
   $entryFormHeading.textContent = 'Edit Entry';
   $photoPreview.setAttribute('src', data.editing.photoUrl);
+  $deleteButton.className = '';
+  $formActions.className = 'space-between column-full';
 }

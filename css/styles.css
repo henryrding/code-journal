@@ -46,8 +46,9 @@ textarea:focus {
   border: 2px solid #552782;
 }
 
-button,
-a {
+#entries-button,
+#save-button,
+#new-button {
   padding: 0.3rem 1rem;
   font-size: 1rem;
   border: none;
@@ -56,6 +57,13 @@ a {
   border-radius: 0.25rem;
   text-decoration: none;
   font-family: inherit;
+}
+
+#delete-button {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: red;
+  border: none;
 }
 
 ul {
@@ -77,9 +85,10 @@ i {
   color: #552782;
 }
 
-.form-actions {
+.flex-end {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
 }
 
 .space-between {

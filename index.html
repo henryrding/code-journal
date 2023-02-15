@@ -48,8 +48,9 @@
           <label for="notes">Notes</label>
           <textarea required name="notes" id="notes" cols="38" rows="6"></textarea>
         </div>
-        <div class="form-actions column-full">
-          <button type="submit">SAVE</button>
+        <div id="form-actions" class="flex-end column-full">
+          <button class="hidden" id="delete-button" type="button">Delete Entry</button>
+          <button id="save-button" type="submit">SAVE</button>
         </div>
       </form>
     </div>
