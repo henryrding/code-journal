@@ -106,14 +106,14 @@ textarea:focus {
   padding-top: 0.25rem;
   padding-right: 0.1rem;
   padding-left: 0.5rem;
-  border-radius: 50% 0 0 50%;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 
 #oldest-first-button {
   padding-top: 0.25rem;
   padding-right: 0.5rem;
   padding-left: 0.1rem;
-  border-radius: 0 50% 50% 0;
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .active {
