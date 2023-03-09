@@ -13,6 +13,8 @@ var $deleteButton = document.querySelector('#delete-button');
 var $overlay = document.querySelector('#overlay');
 var $cancelButton = document.querySelector('#cancel-button');
 var $confirmButton = document.querySelector('#confirm-button');
+var $newestFirstButton = document.querySelector('#newest-first-button');
+var $oldestFirstButton = document.querySelector('#oldest-first-button');
 
 $photoUrl.addEventListener('input', function (event) {
   $photoPreview.setAttribute('src', event.target.value);
@@ -57,7 +59,11 @@ $form.addEventListener('submit', function (event) {
     formData.entryID = data.nextEntryId;
     data.nextEntryId++;
     data.entries.unshift(formData);
-    $ul.prepend(renderEntry(formData));
+    if ($oldestFirstButton.className === 'active') {
+      $ul.appendChild(renderEntry(formData));
+    } else {
+      $ul.prepend(renderEntry(formData));
+    }
   } else if (data.editing !== null) {
     formData.entryID = data.editing.entryID;
     for (var i = 0; i < data.entries.length; i++) {
@@ -105,15 +111,72 @@ function renderEntry(entry) {
   return $entry;
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-  for (var i = 0; i < data.entries.length; i++) {
-    var $entryTree = renderEntry(data.entries[i]);
-    $ul.appendChild($entryTree);
-  } viewSwap(data.view);
+document.addEventListener('DOMContentLoaded', function () {
+  generateNewestFirst();
   if ($ul.children.length > 0) {
     toggleNoEntries();
   }
 });
+
+$newestFirstButton.addEventListener('click', function () {
+  if ($newestFirstButton.className === 'active') {
+    return;
+  }
+  generateNewestFirst();
+  toggleActive();
+});
+
+$oldestFirstButton.addEventListener('click', function () {
+  if ($oldestFirstButton.className === 'active') {
+    return;
+  }
+  generateOldestFirst();
+  toggleActive();
+});
+
+function toggleActive() {
+  if ($newestFirstButton.className === 'active') {
+    $newestFirstButton.className = 'inactive';
+  } else {
+    $newestFirstButton.className = 'active';
+  }
+
+  if ($oldestFirstButton.className === 'active') {
+    $oldestFirstButton.className = 'inactive';
+  } else {
+    $oldestFirstButton.className = 'active';
+  }
+}
+
+function generateNewestFirst() {
+  var $child = $ul.lastElementChild;
+  while ($child) {
+    $ul.removeChild($child);
+    $child = $ul.lastElementChild;
+  }
+  for (var i = 0; i < data.entries.length; i++) {
+    var $entryTree = renderEntry(data.entries[i]);
+    $ul.appendChild($entryTree);
+  } viewSwap(data.view);
+  if ($ul.children.length === 0 && $noEntries.className === 'column-full no-entries hidden') {
+    toggleNoEntries();
+  }
+}
+
+function generateOldestFirst() {
+  var $child = $ul.lastElementChild;
+  while ($child) {
+    $ul.removeChild($child);
+    $child = $ul.lastElementChild;
+  }
+  for (var i = data.entries.length - 1; i >= 0; i--) {
+    var $entryTree = renderEntry(data.entries[i]);
+    $ul.appendChild($entryTree);
+  } viewSwap(data.view);
+  if ($ul.children.length === 0 && $noEntries.className === 'column-full no-entries hidden') {
+    toggleNoEntries();
+  }
+}
 
 function toggleNoEntries() {
   if ($noEntries.className === 'column-full no-entries') {
