@@ -59,7 +59,11 @@ $form.addEventListener('submit', function (event) {
     formData.entryID = data.nextEntryId;
     data.nextEntryId++;
     data.entries.unshift(formData);
-    $ul.prepend(renderEntry(formData));
+    if ($oldestFirstButton.className === 'active') {
+      $ul.appendChild(renderEntry(formData));
+    } else {
+      $ul.prepend(renderEntry(formData));
+    }
   } else if (data.editing !== null) {
     formData.entryID = data.editing.entryID;
     for (var i = 0; i < data.entries.length; i++) {
