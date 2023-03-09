@@ -115,11 +115,17 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 $newestFirstButton.addEventListener('click', function () {
+  if ($newestFirstButton.className === 'active') {
+    return;
+  }
   generateNewestFirst();
   toggleActive();
 });
 
 $oldestFirstButton.addEventListener('click', function () {
+  if ($oldestFirstButton.className === 'active') {
+    return;
+  }
   generateOldestFirst();
   toggleActive();
 });
@@ -148,7 +154,7 @@ function generateNewestFirst() {
     var $entryTree = renderEntry(data.entries[i]);
     $ul.appendChild($entryTree);
   } viewSwap(data.view);
-  if ($ul.children.length === 0) {
+  if ($ul.children.length === 0 && $noEntries.className === 'column-full no-entries hidden') {
     toggleNoEntries();
   }
 }
@@ -163,7 +169,7 @@ function generateOldestFirst() {
     var $entryTree = renderEntry(data.entries[i]);
     $ul.appendChild($entryTree);
   } viewSwap(data.view);
-  if ($ul.children.length === 0) {
+  if ($ul.children.length === 0 && $noEntries.className === 'column-full no-entries hidden') {
     toggleNoEntries();
   }
 }
